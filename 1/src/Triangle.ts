@@ -12,7 +12,7 @@ export class Triangle extends Shape {
         let resultString: string = `Triangle[`;
 
         this.points.forEach((point: Point, index: number) => {
-            resultString += `v${index + 1}=(${point.toString()})${index === this.points.length - 1 ? ']' : ','}`
+            resultString += `v${index + 1}=${point.toString()}${index === this.points.length - 1 ? ']' : ','}`
         });
 
         return resultString;
