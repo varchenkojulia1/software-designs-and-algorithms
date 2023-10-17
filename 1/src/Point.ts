@@ -14,15 +14,13 @@ export class Point {
     distance();
     distance(other: Point);
     distance(x: number, y: number);
-    distance(other?: number | Point, y?: number) {
-
-        if (!y && !other) {
+    distance(other?: number | Point, yValue?: number) {
+        if (!yValue && !other) {
             return this.getDistance([0, this.x], [0, this.y]);
         }
-        if (other instanceof Point) {
-            return this.getDistance([other.x, this.x], [other.y, this.y]);
-        }
-        return this.getDistance([other, this.x], [y, this.y]);
+        const { x, y }: { x: number, y: number } = other instanceof Point ? other : { x: other , y: yValue };
+
+        return this.getDistance([x, this.x], [y, this.y]);
     }
 
     private getDistance(xValues: number[], yValues: number[]): number {

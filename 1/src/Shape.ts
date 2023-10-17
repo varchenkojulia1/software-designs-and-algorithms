@@ -1,4 +1,4 @@
-import {Point} from "./point";
+import { Point } from "./point";
 
 export class Shape {
   public color: string;
@@ -27,11 +27,7 @@ export class Shape {
 
   public getPerimeter(): number {
     return this.points.reduce((perimeter: number, point: Point, index: number) => {
-      let nextPoint: Point = this.points[index + 1];
-      if(index === this.points.length - 1) {
-        nextPoint = this.points[0];
-      }
-      return perimeter + point.distance(nextPoint);
+      return perimeter + point.distance(this.points[index + 1] ?? this.points[0]);
     }, 0)
   }
 }
