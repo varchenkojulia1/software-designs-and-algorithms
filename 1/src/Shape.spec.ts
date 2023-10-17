@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Shape } from "./Shape";
 import { Point } from "./Point";
 

@@ -7,19 +7,14 @@ export class Shape {
 
   constructor(points: Point[]);
   constructor(points: Point[], color: string, filled: boolean);
-  constructor(points: Point[], color?: string, filled?: boolean) {
+  constructor(points: Point[], color: string = 'green', filled: boolean = true) {
     if (points.length < 3) {
       throw new Error('Should be at least 3 points');
     }
     this.points = points;
+    this.color = color;
+    this.filled = filled;
 
-    if (!color && !filled) {
-      this.color = 'green';
-      this.filled = true;
-    } else {
-      this.color = color;
-      this.filled = filled;
-    }
   }
 
   public toString(): string {
@@ -31,12 +26,12 @@ export class Shape {
   }
 
   public getPerimeter(): number {
-    return this.points.reduce((perimetr: number, point: Point, index: number) => {
+    return this.points.reduce((perimeter: number, point: Point, index: number) => {
       let nextPoint: Point = this.points[index + 1];
       if(index === this.points.length - 1) {
         nextPoint = this.points[0];
       }
-      return perimetr + point.distance(nextPoint);
+      return perimeter + point.distance(nextPoint);
     }, 0)
   }
 }
