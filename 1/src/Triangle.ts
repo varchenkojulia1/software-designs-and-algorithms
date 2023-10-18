@@ -17,12 +17,16 @@ export class Triangle extends Shape {
         const side2: number = this.points[1].distance(this.points[2]);
         const side3: number = this.points[2].distance(this.points[0]);
 
-        if (side1 == side2 && side2 == side3) {
+        if (this.areNumbersEqual(side1, side2) && this.areNumbersEqual(side2, side3)) {
             return 'equilateral triangle'
         }
-        if (side1 == side2 || side2 == side3 || side3 == side1) {
+        if (this.areNumbersEqual(side1, side2) || this.areNumbersEqual(side2, side3) || this.areNumbersEqual(side3, side1)) {
             return 'isosceles triangle'
         }
         return 'scalene triangle';
+    }
+
+    private areNumbersEqual(a: number, b: number, tolerance: number = 0.01): boolean {
+        return Math.abs(a - b) <= tolerance;
     }
 }

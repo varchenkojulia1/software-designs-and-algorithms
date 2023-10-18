@@ -1,11 +1,5 @@
 export class Point {
-    public x: number;
-    public y: number;
-
-    constructor(x: number = 0, y: number = 0) {
-        this.x = x;
-        this.y = y;
-    }
+    constructor(public x: number = 0, public y: number = 0) {}
 
     public toString(): string {
         return `(${this.x}, ${this.y})`
@@ -14,16 +8,10 @@ export class Point {
     distance();
     distance(other: Point);
     distance(x: number, y: number);
-    distance(other?: number | Point, yValue?: number) {
-        if (!yValue && !other) {
-            return this.getDistance([0, this.x], [0, this.y]);
-        }
-        const { x, y }: { x: number, y: number } = other instanceof Point ? other : { x: other , y: yValue };
+    distance(x?: number | Point, y?: number) {
+        const xAxis = x instanceof Point ? x.x : x ?? 0;
+        const yAxis = x instanceof Point ? x.y : y ?? 0;
 
-        return this.getDistance([x, this.x], [y, this.y]);
-    }
-
-    private getDistance(xValues: number[], yValues: number[]): number {
-        return Number(Math.sqrt(Math.pow((xValues[0] - xValues[1]), 2) + Math.pow((yValues[0] - yValues[1]), 2)).toFixed(2));
+        return Math.sqrt(Math.pow((xAxis - this.x), 2) + Math.pow((yAxis - this.y), 2));
     }
 }
