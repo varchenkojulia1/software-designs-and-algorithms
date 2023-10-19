@@ -1,5 +1,5 @@
 export class Point {
-    constructor(public x: number = 0, public y: number = 0) {}
+    constructor(private x: number = 0, private y: number = 0) {}
 
     public toString(): string {
         return `(${this.x}, ${this.y})`
