@@ -12,7 +12,7 @@ export class Sword extends Weapon {
     private readonly maxEffectiveDamage: number;
 
     constructor({ baseDurability, baseDamage, weight, value }: SwordConstruction) {
-        super('sword', baseDamage, baseDurability, value, weight);
+        super({ name: 'sword', baseDamage, baseDurability, value, weight });
         this.maxEffectiveDamage = this.baseDamage * MAX_EFFECTIVE_DAMAGE_COEFF;
     }
 
