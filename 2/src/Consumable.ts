@@ -1,6 +1,6 @@
 import { Item } from "./Item";
 
-export class Consumable extends Item {
+export abstract class Consumable extends Item {
     public isConsumed: boolean = false;
     private readonly _isSpoiled: boolean;
 

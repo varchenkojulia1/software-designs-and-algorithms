@@ -1,6 +1,15 @@
 import { Item } from "./Item";
 
-export class Weapon extends Item {
+interface WeaponConstruction {
+    name: string;
+    baseDamage: number;
+    baseDurability: number;
+    value: number;
+    weight: number;
+
+}
+
+export abstract class Weapon extends Item {
     public static MODIFIER_CHANGE_RATE = 0.05;
 
     public readonly name: string;
@@ -8,19 +17,13 @@ export class Weapon extends Item {
     public readonly weight: number;
 
     protected baseDamage: number;
-    protected damageModifier: number = 0;
-    protected durabilityModifier: number = 0;
+    protected damageModifier = 0;
+    protected durabilityModifier = 0;
 
     private readonly baseDurability: number;
     private isBroken: boolean = false;
 
-    constructor(
-        name: string,
-        baseDamage: number,
-        baseDurability: number,
-        value: number,
-        weight: number
-    ) {
+    constructor({ name, value, weight, baseDurability, baseDamage }: WeaponConstruction) {
         super(name, value, weight);
         this.baseDamage = baseDamage;
         this.baseDurability = baseDurability;
