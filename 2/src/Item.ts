@@ -1,7 +1,7 @@
 import { Comparable } from "./Comparable";
 
-export class Item implements Comparable<Item> {
-    private static idCounter: number = 0;
+export abstract class Item implements Comparable<Item> {
+    private static idCounter = 0;
 
     public readonly name: string;
     public value: number;

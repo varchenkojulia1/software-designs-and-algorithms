@@ -9,7 +9,7 @@ export class Inventory {
     }
 
     public sort(comparator?: ItemComparator): void {
-        if (!!comparator) {
+        if (comparator) {
             this.items.sort(comparator.compare);
             return;
         }
