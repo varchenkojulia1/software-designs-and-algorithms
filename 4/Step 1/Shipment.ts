@@ -1,3 +1,5 @@
+import {Shipper} from "../Step 2/Shipper";
+
 export interface ShipmentInfo {
     ShipmentID: number;
     Weight: number;
@@ -19,6 +21,7 @@ export class Shipment {
     public toAddress: string;
     public toZipCode: string;
     public shipmentID: number;
+    public shipper: Shipper;
 
     constructor(shipment: ShipmentInfo) {
         this.shipmentID = shipment.ShipmentID === 0 ? this.generateShipmentId() : shipment.ShipmentID;
@@ -28,6 +31,7 @@ export class Shipment {
         this.toAddress = shipment.ToAddress;
         this.toZipCode = shipment.ToZipCode;
 
+        this.shipper = Shipper.getInstance(this.fromZipCode);
     }
 
     public static getInstance(shipmentInfo: ShipmentInfo): Shipment {
