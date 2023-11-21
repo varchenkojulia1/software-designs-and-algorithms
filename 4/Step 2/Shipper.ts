@@ -2,7 +2,6 @@ import { AirEastShipper } from "./AirEastShipper";
 import { ChicagoSprintShipper } from "./ChicagoSprintShipper";
 import { PacificParcelShipper } from "./PacificParcelShipper";
 
-
 export abstract class Shipper {
     public static shipper: Shipper;
     public shipmentCost: number;
