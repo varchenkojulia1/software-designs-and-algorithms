@@ -1,5 +1,6 @@
-import { Maybe, none, some } from './maybe';
-import { InitialClient } from "../mocks";
+import {Maybe, none, some} from './maybe';
+import {InitialClient} from "../mocks";
+import {Point} from "../types";
 
 export const constant = <A>(a: A) => () => a;
 
@@ -21,7 +22,7 @@ export function flow(...fns: Array<(...args: Array<any>) => any>) {
  * Handy for automatic data typing
  */
 export function pipe<A, B>(a: A, fb: (a: A) => B): B;
-export function pipe<A, B>(a: any, ...fns: Array<(...args: Array<any>) => any>): B
+export function pipe<A, B>(a: A, ...fns: Array<(...args: Array<any>) => any>): B
 export function pipe(a: any, ...fns: Array<(...args: Array<any>) => any>) {
   if (fns.length === 0) {
     return a;
@@ -59,3 +60,10 @@ export const matcher = <A, R>(...predicates: Array<[Predicate<A>, (a: A) => R]>)
 export const prop = <V extends Record<string, unknown>, K extends keyof V>(key: K) => (obj: V): Maybe<V[K]> => key in obj || obj[key] ?  some(obj[key]) : none;
 
 export const getDemands = prop<InitialClient, keyof InitialClient>('demands');
+
+export function getDistance(a: Point, b: Point): number {
+    const dist1 = Math.abs(a.x - b.x);
+    const dist2 = Math.abs(a.y - b.y);
+
+    return +Math.sqrt(dist1 * dist1 + dist2 * dist2).toFixed(3);
+}

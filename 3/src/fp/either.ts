@@ -49,13 +49,15 @@ export const map = <E, A, B>(fn: (a: A) => B) => (fa: Either<E, A>): Either<E, B
  * Generally speaking: ap(Either<E, A>)   ap(Either<E, B>) => Either<E, C>
  (x: A)          => (y: B)           => C
  */
-export const ap = <E, A>(fa: Either<E, A>) => <B>(fab: Either<E, (a: A) => B>): Either<E, B> => (
-  isLeft(fab)
-    ? fab
-    : isLeft(fa)
-      ? fa
-      : right(fab.right(fa.right))
-);
+export const ap = <E, A>(fa: Either<E, A>) => <B>(fab: Either<E, (a: A) => B>): Either<E, B> => {
+  console.log(fab, fa)
+      return isLeft(fab)
+          ? fab
+          : isLeft(fa)
+              ? fa
+              : right(fab.right(fa.right))
+    }
+;
 
 /**
  * For flatting nested instances
