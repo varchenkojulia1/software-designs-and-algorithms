@@ -1,10 +1,10 @@
 export type Left<E> = {
-  _tag: 'Left',
-  left: E,
+    _tag: 'Left',
+    left: E,
 }
 export type Right<A> = {
-  _tag: 'Right',
-  right: A,
+    _tag: 'Right',
+    right: A,
 }
 
 /**
@@ -19,16 +19,16 @@ export type Either<E, A> = Left<E> | Right<A>
  * Creates Right (correct) instance
  */
 export const right = <E = never, A = never>(val: A): Either<E, A> => ({
-  _tag: 'Right',
-  right: val,
+    _tag: 'Right',
+    right: val,
 });
 
 /**
  * Creates Left (error) instance
  */
 export const left = <E = never, A = never>(val: E): Either<E, A> => ({
-  _tag: 'Left',
-  left: val,
+    _tag: 'Left',
+    left: val,
 });
 
 export const isRight = <E, A>(val: Either<E, A>): val is Right<A> => val._tag === 'Right';
@@ -40,7 +40,7 @@ export const isLeft = <E, A>(val: Either<E, A>): val is Left<E> => val._tag === 
  * Just like with arrays, when we maps Array<A> to Array<B>
  */
 export const map = <E, A, B>(fn: (a: A) => B) => (fa: Either<E, A>): Either<E, B> => {
-  return isRight(fa) ? right(fn(fa.right)) : fa;
+    return isRight(fa) ? right(fn(fa.right)) : fa;
 };
 
 /**
@@ -49,21 +49,19 @@ export const map = <E, A, B>(fn: (a: A) => B) => (fa: Either<E, A>): Either<E, B
  * Generally speaking: ap(Either<E, A>)   ap(Either<E, B>) => Either<E, C>
  (x: A)          => (y: B)           => C
  */
-export const ap = <E, A>(fa: Either<E, A>) => <B>(fab: Either<E, (a: A) => B>): Either<E, B> => {
-  console.log(fab, fa)
-      return isLeft(fab)
-          ? fab
-          : isLeft(fa)
-              ? fa
-              : right(fab.right(fa.right))
-    }
+export const ap = <E, A>(fa: Either<E, A>) => <B>(fab: Either<E, (a: A) => B>): Either<E, B> => (
+    isLeft(fab)
+        ? fab
+        : isLeft(fa)
+            ? fa
+            : right(fab.right(fa.right)))
 ;
 
 /**
  * For flatting nested instances
  */
 export const flatten = <E, A>(a: Either<E, Either<E, A>>): Either<E, A> => (
-  isRight(a) ? a.right : a
+    isRight(a) ? a.right : a
 );
 
 /**
@@ -72,16 +70,16 @@ export const flatten = <E, A>(a: Either<E, Either<E, A>>): Either<E, A> => (
  * Or the Promise is rejected - should return Left
  */
 export const fromPromise = <E, A>(promise: Promise<A>): Promise<Either<E, A>> => {
-  return promise
-      .then((value: A) => right(value))
-      .catch((error: E) => left(error))
+    return promise
+        .then((value: A) => right(value))
+        .catch((error: E) => left(error))
 };
 /**
  * Get the value from the Right, or call onLeft function
  * See examples in the tests
  */
 export const getOrElse = <E, A>(onLeft: (e: E) => A) => (ma: Either<E, A>): A => (
-  isRight(ma) ? ma.right : onLeft(ma.left)
+    isRight(ma) ? ma.right : onLeft(ma.left)
 );
 
 /**
