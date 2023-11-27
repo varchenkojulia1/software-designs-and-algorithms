@@ -40,7 +40,7 @@ export const isLeft = <E, A>(val: Either<E, A>): val is Left<E> => val._tag === 
  * Just like with arrays, when we maps Array<A> to Array<B>
  */
 export const map = <E, A, B>(fn: (a: A) => B) => (fa: Either<E, A>): Either<E, B> => {
-  return isRight(fa) ? right(fn(fa.right)) : left(fa.left);
+  return isRight(fa) ? right(fn(fa.right)) : fa;
 };
 
 /**
