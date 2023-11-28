@@ -1,22 +1,16 @@
 import { Consumable } from "./Consumable";
 
-interface PizzaConstruction {
-    value: number;
-    weight: number;
-    isSpoiled: boolean;
-    numberOfSlices: number;
-}
 export class Pizza extends Consumable {
     public readonly numberOfSlices: number;
-    private numberOfEatenSlices = 0;
+    private numberOfEatenSlices: number = 0;
 
-    constructor({ value, weight, isSpoiled, numberOfSlices }: PizzaConstruction) {
+    constructor(value: number, weight: number, isSpoiled: boolean, numberOfSlices) {
         super('pizza', value, weight, isSpoiled);
         this.numberOfSlices = numberOfSlices;
     }
 
     public use(): string {
-        const numberOfEatenSlicesNew = this.numberOfEatenSlices + 1;
+        const numberOfEatenSlicesNew: number = this.numberOfEatenSlices + 1;
         this.isConsumed = numberOfEatenSlicesNew > this.numberOfSlices;
 
         if (numberOfEatenSlicesNew <= this.numberOfSlices) {

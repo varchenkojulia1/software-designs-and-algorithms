@@ -1,17 +1,11 @@
 import { Weapon } from "./Weapon";
 
-const MAX_EFFECTIVE_DAMAGE_COEFF = 1.25;
-interface SwordConstruction {
-    baseDamage: number;
-    baseDurability: number;
-    value: number;
-    weight: number;
-}
+const MAX_EFFECTIVE_DAMAGE_COEFF: number = 1.25;
 
 export class Sword extends Weapon {
     private readonly maxEffectiveDamage: number;
 
-    constructor({ baseDurability, baseDamage, weight, value }: SwordConstruction) {
+    constructor(baseDamage: number, baseDurability: number,value: number, weight: number) {
         super('sword', baseDamage, baseDurability, value, weight);
         this.maxEffectiveDamage = this.baseDamage * MAX_EFFECTIVE_DAMAGE_COEFF;
     }
