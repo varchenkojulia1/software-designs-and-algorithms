@@ -39,9 +39,8 @@ export const isLeft = <E, A>(val: Either<E, A>): val is Left<E> => val._tag === 
  * Maps the right value of the Either instance from A to B
  * Just like with arrays, when we maps Array<A> to Array<B>
  */
-export const map = <E, A, B>(fn: (a: A) => B) => (fa: Either<E, A>): Either<E, B> => {
-  return isRight(fa) ? right(fn(fa.right)) : left(fa.left);
-};
+export const map = <E, A, B>(fn: (a: A) => B) => (fa: Either<E, A>): Either<E, B> => (
+);
 
 /**
  * Add possibility to act as an Apply
@@ -91,6 +90,5 @@ export const getOrElse = <E, A>(onLeft: (e: E) => A) => (ma: Either<E, A>): A =>
  * reduce Array<A> => B
  */
 export const fold = <E, A, B>(onLeft: (e: E) => B, onRight: (a: A) => B) => (ma: Either<E, A>): B => (
-    isRight(ma) ? onRight(ma.right) : onLeft(ma.left)
 );
 

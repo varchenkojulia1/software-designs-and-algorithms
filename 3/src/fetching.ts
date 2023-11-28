@@ -6,4 +6,4 @@ export const fetchExecutor = () => sleep(500)
   .then(() => mockExecutor);
 
 export const fetchClient = () => sleep(700)
-    .then(() => mockClient);
+  .then(() => mockClient);

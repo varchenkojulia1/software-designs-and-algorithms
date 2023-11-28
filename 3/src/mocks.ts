@@ -1,10 +1,6 @@
-import { Demand, User } from './types';
-export interface InitialClient extends User, Record<string, any> {
-  demands: Demand[];
-  reward: number;
-}
+import { Demand } from './types';
 
-export const mockClient: InitialClient[] = [
+export const mockClient = [
   { name: 'Philip', demands: [Demand.Driving, Demand.Fighting], position: { x: 10, y: 30 }, reward: 600 },
   { name: 'Payne', demands: [Demand.Driving], position: { x: 5, y: 2 }, reward: 99 },
   { name: 'Paul', demands: [Demand.Fighting], position: { x: 10, y: 6 }, reward: 330 },

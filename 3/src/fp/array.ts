@@ -5,5 +5,4 @@ export const map = <A, B>(f: (elem: A, index: number, target: Array<A>) => B) =>
 );
 
 export const sort = <A>(ord: Ord<A>) => (list: Array<A>): Array<A> => (
-    list.sort(ord.compare)
 );

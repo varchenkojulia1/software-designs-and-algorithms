@@ -1,5 +1,4 @@
 import { Maybe, none, some } from './maybe';
-import { InitialClient } from "../mocks";
 
 export const constant = <A>(a: A) => () => a;
 
@@ -8,7 +7,7 @@ export const constant = <A>(a: A) => () => a;
  */
 export function flow<A, B, C>(fa: (a: A) => B, fb: (b: B) => C): (a: A) => C;
 export function flow<A, B, C, D>(fa: (a: A) => B, fb: (b: B) => C, fc: (c: C) => D): (a: A) => D;
-export function flow<A, B, C, D>(...fns: Array<(...args: Array<any>) => any>);
+export function flow(...fns: Array<(...args: Array<any>) => any>);
 export function flow(...fns: Array<(...args: Array<any>) => any>) {
   return (a: any) => fns.reduce(
     (acc, fn) => fn(acc),
@@ -56,6 +55,4 @@ export const matcher = <A, R>(...predicates: Array<[Predicate<A>, (a: A) => R]>)
  * const getAge = prop('age')
  * expect(getAge({ age: 10 })).toStrictEqual(some(10))
  */
-export const prop = <V extends Record<string, unknown>, K extends keyof V>(key: K) => (obj: V): Maybe<V[K]> => key in obj || obj[key] ?  some(obj[key]) : none;
-
-export const getDemands = prop<InitialClient, keyof InitialClient>('demands');
+export const prop = <V extends Record<string, unknown>, K extends keyof V>(key: K) => (obj: V): Maybe<V[K]> => key in obj ? some(obj[key]) : none;
