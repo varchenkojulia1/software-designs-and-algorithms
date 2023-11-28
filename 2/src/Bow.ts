@@ -8,7 +8,7 @@ interface BowConstruction {
 }
 export class Bow extends Weapon {
     constructor({ baseDamage, baseDurability, weight, value }: BowConstruction) {
-        super({ name: 'bow', baseDamage, baseDurability, value, weight});
+        super('bow', baseDamage, baseDurability, value, weight);
     }
 
     polish(): void {
