@@ -6,7 +6,6 @@ interface PizzaConstruction {
     isSpoiled: boolean;
     numberOfSlices: number;
 }
-
 export class Pizza extends Consumable {
     public readonly numberOfSlices: number;
     private numberOfEatenSlices = 0;

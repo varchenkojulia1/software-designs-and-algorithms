@@ -7,6 +7,7 @@ interface SwordConstruction {
     value: number;
     weight: number;
 }
+
 export class Sword extends Weapon {
     private readonly maxEffectiveDamage: number;
 
