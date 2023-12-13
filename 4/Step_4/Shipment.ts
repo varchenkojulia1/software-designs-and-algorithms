@@ -1,9 +1,13 @@
 import { marksValues, Marks } from "./Marks";
 import { Shipper } from "./Shipper";
 import { ShipperFactory } from "./ShipperFactory";
+import { v4 as uuidv4 } from 'uuid';
 
-export type ShipmentType = 'letter' | 'package' | 'oversized';
-
+export enum PackageType {
+    letter,
+    package,
+    oversized
+}
 export interface ShipmentInfo {
     shipmentId: number;
     weight: number;
@@ -25,7 +29,7 @@ export class Shipment {
 
     public shipper: Shipper;
 
-    private type: ShipmentType;
+    private type: PackageType;
 
     constructor(shipment: ShipmentInfo) {
         this.shipmentID = shipment.shipmentId === 0 ? this.generateShipmentId() : shipment.shipmentId;
@@ -49,21 +53,19 @@ export class Shipment {
      Cost = ${this.shipper.getCost(this.type, this.weight)}, company: ${this.shipper.name}`;
     }
 
-    private getShipmentType(weight: number): ShipmentType {
+    private getShipmentType(weight: number): PackageType {
         if (weight < 0) {
-            throw new Error('Incorrect weight value:' + weight);
+            throw new Error(`Incorrect weight value: ${weight}`);
         }
-        return weight <= 15 ? 'letter' : weight <= 160 ? 'package' : 'oversized';
+        return weight <= 15 ? PackageType.letter : weight <= 160 ? PackageType.package : PackageType.oversized;
     }
 
     private getMarks(marks: Marks[]): string[] {
-        return marks.map((mark: Marks) => {
-            return marksValues[mark] ?? ''
-        })
+        return marks.map((mark) => marksValues[mark] ?? '')
     }
 
     private generateShipmentId(): number {
-        return +Math.random().toString(16).slice(2, 10);
+        return uuidv4();
     }
 }
 
